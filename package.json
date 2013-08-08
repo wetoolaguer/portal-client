@@ -16,6 +16,8 @@
       "mocha" : "*",
       "nock" : "*"
   },
-  "author": "Weto Olaguer",
-  "email": "wenceslaoolaguer@gmail.com"
+  "author": {
+      "name" : "Weto Olaguer",
+      "email": "wenceslaoolaguer@gmail.com"
+  }
 }
