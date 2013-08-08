@@ -1,0 +1,21 @@
+{
+  "name": "portal-client",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./bin/client",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+      "request": "2.22.0",
+      "form-data": "*",
+      "mocha" : "*",
+      "nock" : "*"
+  },
+  "author": "Weto Olaguer <wenceslaoolaguer@gmail.com>",
+  "license": ""
+}
