@@ -1,6 +1,6 @@
 var Routes = {
-    "sample"               : "/sample/path",
-    "another"             : { uri  : "/default/path",
+    "git"                 : "/",
+    "user"                : { uri  : "/default/path",
                               get  : "/get/path",
                               post : "/post/path",
                               put  : "/put/path",

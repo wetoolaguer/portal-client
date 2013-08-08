@@ -2,7 +2,7 @@
   "name": "portal-client",
   "version": "0.1.0",
   "description": "This is portal-client.",
-  "main": "./bin/rest_client",
+  "main": "./lib/rest_client",
   "scripts": {
     "test": "make test"
   },

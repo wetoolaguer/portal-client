@@ -1,4 +1,4 @@
-var RestClient = require ("../bin/rest_client");
+var RestClient = require ("../lib/rest_client");
 var config = require ("./config");
 var assert = require ("assert");
 var async = require ("async");
