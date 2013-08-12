@@ -1,6 +1,7 @@
 var Config = {
                      uri   : "http://www.github.com",
-               auth_path   : "/auth/user",
+                basePath   : "/",
+               authPath   : "auth/user",
                credentials : {   email : "weto@site.com",
                               password : "password" }
 };
