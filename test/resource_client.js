@@ -1,16 +1,22 @@
 var RestClient = require ("../lib/rest_client");
-var config = require ("./config");
 var assert = require ("assert");
 var async = require ("async");
 var fs = require("fs");
 
 describe("ResourceClient", function () {
 
-    var routes = { "admin" : "/admin",
-                   "files" : "/files",
-                 };
+    var config = {
+                         uri   : "http://www.site.com",
+                    basePath   : "",
+                   authPath    : "/auth/user",
+                   credentials : {   email : "weto@site.com",
+                                  password : "password" },
+                        routes : { "admin" : "/admin",
+                                   "files" : "/files",
+                                 }
+    };
 
-    var restClient = new RestClient(config, routes);
+    var restClient = new RestClient(config);
 
     before (function (done) {
         restClient.init(function(){
