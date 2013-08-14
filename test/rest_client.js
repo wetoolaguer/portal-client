@@ -1,12 +1,12 @@
 var RestClient = require ("../lib/rest_client");
 var assert = require ("assert");
 var async = require ("async");
+var fs = require("fs");
 
 describe("RestClient", function () {
 
     var config = {
-                         uri   : "http://www.site.com",
-                    basePath   : "",
+                     baseURI   : "http://www.site.com",
                    authPath    : "/auth/user",
                    credentials : {   email : "weto@site.com",
                                   password : "password" },
@@ -23,6 +23,85 @@ describe("RestClient", function () {
 
     it("should generate namespaces", function () {
         assert.equal(typeof restClient.users, 'object');
+    });
+
+    describe ("#get", function () {
+        it ("should issue http get request", function (done) {
+            restClient.get("http://www.site.com/users", function (err, resp, body) {
+                assert.equal (resp.statusCode, 200);
+                done();
+            });
+        });
+    });
+
+    describe ("#post", function () {
+        it ("should issue http post request", function (done) {
+            restClient.post("http://www.site.com/users/new", { name: 'Weto' },
+            function (err, resp, body) {
+                assert.equal (resp.statusCode, 201);
+                done();
+            });
+        });
+
+        it ("should issue multipart http post request", function (done) {
+            var fileloc = './test/files/sample.txt';
+            var file = fs.createReadStream(fileloc);
+
+            restClient.post("http://www.site.com/users/new", { user: file },
+            function (err, resp, body) {
+                assert.equal (resp.statusCode, 201);
+                done();
+            });
+        });
+    });
+
+    describe ("#put", function () {
+        it ("should issue http put request", function (done) {
+            restClient.put("http://www.site.com/users/1", { name: 'Wenceslao' },
+            function (err, resp, body) {
+                assert.equal (resp.statusCode, 200);
+                done();
+            });
+        });
+
+        it ("should issue multipart http put request", function (done) {
+            var fileloc = './test/files/sample.txt';
+            var file = fs.createReadStream(fileloc);
+
+            restClient.put("http://www.site.com/users/1", { user: file },
+            function (err, resp, body) {
+                assert.equal (resp.statusCode, 200);
+                done();
+            });
+        });
+    });
+
+    describe ("#del", function () {
+        it ("should issue http del request", function (done) {
+            restClient.del("http://www.site.com/users/1",
+            function (err, resp, body) {
+                assert.equal (resp.statusCode, 200);
+                done();
+            });
+        });
+    });
+
+    describe ("#constructURI", function () {
+        it("should be able to generate URI based on passed params", function () {
+            var uri = "www.site.com/users/:id/:name";
+            var reqObj = { id:1, name:"weto" };
+            uri = restClient.constructURI(reqObj, uri);
+
+            assert.equal (uri, "www.site.com/users/1/weto");
+        });
+
+        it("should delete unsupplied URI params and normalize path", function () {
+            var uri = "www.site.com/users/:id/:name";
+            var reqObj = { name:"weto" };
+            uri = restClient.constructURI(reqObj, uri);
+
+            assert.equal (uri, "www.site.com/users/weto");
+        });
     });
 
     describe("Generated Namespace", function() {
@@ -42,4 +121,5 @@ describe("RestClient", function () {
             assert.equal(typeof restClient.users.deleteBy, 'function');
         });
     });
+
 });

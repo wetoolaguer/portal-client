@@ -6,13 +6,17 @@ var fs = require("fs");
 describe("ResourceClient", function () {
 
     var config = {
-                         uri   : "http://www.site.com",
-                    basePath   : "",
-                   authPath    : "/auth/user",
+                       baseURI :"http://www.site.com",
+                      authPath : "/auth/user",
                    credentials : {   email : "weto@site.com",
                                   password : "password" },
-                        routes : { "admin" : "/admin",
-                                   "files" : "/files",
+                        routes : {
+                                    "users" : {
+                                                 get  : "/users/:id",
+                                                 post : "/users",
+                                                 put  : "/users/:id",
+                                                 del  : "/users/:id"
+                                              }
                                  }
     };
 
@@ -33,8 +37,8 @@ describe("ResourceClient", function () {
         });
 
         it ("should issue multipart http POST request", function (done) {
-            var fileLoc = './test/files/sample.txt';
-            var file = fs.createReadStream(fileLoc);
+            var fileloc = './test/files/sample.txt';
+            var file = fs.createreadstream(fileloc);
 
             restClient.files.post ({ file: file }, function (err, resp, body) {
                 assert(resp.statusCode, 201);
@@ -43,9 +47,9 @@ describe("ResourceClient", function () {
         });
     });
 
-    describe("#get()", function () {
+    describe("#findBy", function () {
         it ("should issue http GET request", function (done) {
-            restClient.admin.get("Weto Olaguer", function(err, resp, body) {
+            restClient.users.findBy({ id : 1 }, function(err, resp, body) {
                 assert(resp.statusCode, 200);
                 done();
             });
