@@ -2,7 +2,7 @@ REPORTER = dot
 
 test:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--reporter nyan --timeout 1000
+		--reporter list --timeout 1000
 
 test-w:
 	@NODE_ENV=test ./node_modules/.bin/mocha \

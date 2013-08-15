@@ -11,12 +11,14 @@ describe("ResourceClient", function () {
                    credentials : {   email : "weto@site.com",
                                   password : "password" },
                         routes : {
-                                    "users" : {
-                                                 get  : "/users/:id",
-                                                 post : "/users",
-                                                 put  : "/users/:id",
-                                                 del  : "/users/:id"
-                                              }
+                                    users : {
+
+                                                  findBy  : { path: "/users/:id", method: 'get' },
+                                                   create : { path: "/users", method: 'post' },
+                                                  update  : { path: "/users/:id", method: 'put' },
+                                                deleteBy  : { path: "/users/:id", method: 'del' }
+
+                                            }
                                  }
     };
 

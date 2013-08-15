@@ -10,7 +10,14 @@ describe("RestClient", function () {
                    authPath    : "/auth/user",
                    credentials : {   email : "weto@site.com",
                                   password : "password" },
-                        routes : { "users" : "/users" }
+                        routes : {
+                                      users : {
+                                                   findBy : { path: "/users/:id", method: 'get' },
+                                                   create : { path: "/users", method: 'post' },
+                                                   update : { path: "/users/:id", method: 'put' },
+                                                 deleteBy : { path: "/users/:id", method: 'del' }
+                                              }
+                                }
     };
 
     var restClient = new RestClient(config);
