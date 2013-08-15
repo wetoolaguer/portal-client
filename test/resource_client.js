@@ -62,7 +62,7 @@ describe("ResourceClient", function () {
 
             var id = "1";
 
-            restClient.users.update({ id: 1 }, { name: "Wenceslao" },
+            restClient.users.update({ name: "Wenceslao" }, { id: 1 },
                                   function(err, resp, body) {
                 assert(resp.statusCode, 200);
                 done();
@@ -75,7 +75,7 @@ describe("ResourceClient", function () {
 
             var id = "1";
 
-            restClient.users.update ({ id: 1 }, { name: file },
+            restClient.users.update ({ name: file }, { id: 1 },
                                      function (err, resp, body) {
                 assert(resp.statusCode, 200);
                 done();
