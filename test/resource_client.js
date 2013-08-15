@@ -6,13 +6,17 @@ var fs = require("fs");
 describe("ResourceClient", function () {
 
     var config = {
-                         uri   : "http://www.site.com",
-                    basePath   : "",
-                   authPath    : "/auth/user",
+                       baseURI :"http://www.site.com",
+                      authPath : "/auth/user",
                    credentials : {   email : "weto@site.com",
                                   password : "password" },
-                        routes : { "admin" : "/admin",
-                                   "files" : "/files",
+                        routes : {
+                                    "users" : {
+                                                 get  : "/users/:id",
+                                                 post : "/users",
+                                                 put  : "/users/:id",
+                                                 del  : "/users/:id"
+                                              }
                                  }
     };
 
@@ -24,41 +28,41 @@ describe("ResourceClient", function () {
         });
     });
 
-    describe("#post()", function () {
+    describe("#create", function () {
         it ("should issue http POST request", function (done) {
-            restClient.admin.post({name: "Weto Olaguer"}, function(err, resp, body) {
+            restClient.users.create({name: "Weto"}, function(err, resp, body) {
                 assert(resp.statusCode, 201);
                 done();
             });
         });
 
         it ("should issue multipart http POST request", function (done) {
-            var fileLoc = './test/files/sample.txt';
-            var file = fs.createReadStream(fileLoc);
+            var fileloc = './test/files/sample.txt';
+            var file = fs.createReadStream(fileloc);
 
-            restClient.files.post ({ file: file }, function (err, resp, body) {
+            restClient.users.create({ user: file }, function (err, resp, body) {
                 assert(resp.statusCode, 201);
                 done();
             });
         });
     });
 
-    describe("#get()", function () {
+    describe("#findBy", function () {
         it ("should issue http GET request", function (done) {
-            restClient.admin.get("Weto Olaguer", function(err, resp, body) {
+            restClient.users.findBy({ id : 1 }, function(err, resp, body) {
                 assert(resp.statusCode, 200);
                 done();
             });
         });
     });
 
-    describe("#put()", function () {
+    describe("#update", function () {
 
         it ("should issue http PUT request", function (done) {
 
             var id = "1";
 
-            restClient.admin.put(id, {name: "Towe Olaguer", 'permissions[]' : ""},
+            restClient.users.update({ id: 1 }, { name: "Wenceslao" },
                                   function(err, resp, body) {
                 assert(resp.statusCode, 200);
                 done();
@@ -71,25 +75,17 @@ describe("ResourceClient", function () {
 
             var id = "1";
 
-            restClient.files.put (id, { file: file }, function (err, resp, body) {
+            restClient.users.update ({ id: 1 }, { name: file },
+                                     function (err, resp, body) {
                 assert(resp.statusCode, 200);
                 done();
             });
         });
     });
 
-    describe("#findBy", function () {
-        it ("should issue http GET request with params", function (done) {
-            restClient.admin.findBy({ name : "Towe Olaguer"}, function (err, resp, body) {
-                assert(resp.statusCode, 200);
-                done();
-            });
-        });
-    });
-
-    describe("#del()", function () {
+    describe("#deleteBy", function () {
         it ("should issue http DEL request", function (done) {
-            restClient.admin.del("1", function(err, resp, body) {
+            restClient.users.deleteBy({ id : 1 }, function(err, resp, body) {
                 assert(resp.statusCode, 200);
                 done();
             });
