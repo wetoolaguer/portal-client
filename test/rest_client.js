@@ -27,7 +27,7 @@ describe("RestClient", function () {
 
     describe ("#get", function () {
         it ("should issue http get request", function (done) {
-            restClient.get("http://www.site.com/users", function (err, resp, body) {
+            restClient.get("http://www.site.com/users/1", function (err, resp, body) {
                 assert.equal (resp.statusCode, 200);
                 done();
             });
@@ -36,7 +36,7 @@ describe("RestClient", function () {
 
     describe ("#post", function () {
         it ("should issue http post request", function (done) {
-            restClient.post("http://www.site.com/users/new", { name: 'Weto' },
+            restClient.post("http://www.site.com/users", { name: 'Weto' },
             function (err, resp, body) {
                 assert.equal (resp.statusCode, 201);
                 done();
@@ -47,7 +47,7 @@ describe("RestClient", function () {
             var fileloc = './test/files/sample.txt';
             var file = fs.createReadStream(fileloc);
 
-            restClient.post("http://www.site.com/users/new", { user: file },
+            restClient.post("http://www.site.com/users", { user: file },
             function (err, resp, body) {
                 assert.equal (resp.statusCode, 201);
                 done();
@@ -110,11 +110,11 @@ describe("RestClient", function () {
         });
 
         it("should have create method", function () {
-            assert.equal(typeof restClient.users.createBy, 'function');
+            assert.equal(typeof restClient.users.create, 'function');
         });
 
         it("should have update method", function () {
-            assert.equal(typeof restClient.users.updateBy, 'function');
+            assert.equal(typeof restClient.users.update, 'function');
         });
 
         it("should have delete method", function () {
