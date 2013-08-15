@@ -16,7 +16,14 @@ describe("RestClient", function () {
     var restClient = new RestClient(config);
 
     before(function (done) {
-        restClient.init (function() {
+        restClient.init (false, function() {
+            done();
+        });
+    });
+
+    it ("should be able to authenticate", function(done) {
+        restClient.authenticate(config.credentials, function(err, resp, body) {
+            assert.equal (resp.statusCode, 200);
             done();
         });
     });

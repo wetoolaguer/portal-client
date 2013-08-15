@@ -2,7 +2,7 @@ var nock = require('nock');
 
 before(function() {
     nock("http://www.site.com")
-    .post("/auth/user")
+    .post("/auth/user", { email : "weto@site.com", password : "password" })
     .times(Number.MAX_VALUE)
     .reply(200)
     .get("/users/1")
