@@ -109,12 +109,18 @@ describe("RestClient", function () {
             assert.equal (uri, "www.site.com/users/1/weto");
         });
 
-        it("should delete unsupplied URI params and normalize path", function () {
+        it("should throw error when there are unsupplied params", function () {
             var uri = "www.site.com/users/:id/:name";
             var reqObj = { name:"weto" };
-            uri = restClient.constructURI(reqObj, uri);
+            var throwedErr = false;
 
-            assert.equal (uri, "www.site.com/users/weto");
+            try {
+                uri = restClient.constructURI(reqObj, uri);
+            } catch (err) {
+                throwedErr = true;
+            }
+
+            assert(throwedErr);
         });
     });
 
