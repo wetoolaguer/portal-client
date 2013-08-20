@@ -113,12 +113,12 @@ The requestObject is an object passed to the generated http functions.
   });
 ```
 Parameters:
-+reqObj (required if parameter is desired): The requestObject of which
++ reqObj (required if parameter is desired): The requestObject of which
  key-value pairs replace the corresponding parameters in the declared
 routes.
-+paramter (optional):An object of which key-value pairs are converted as
++ paramter (optional):An object of which key-value pairs are converted as
  query string.
-+callback: The callback function to be executed when the request
++ callback: The callback function to be executed when the request
  receives a response.
 #### Generated Post Methods
 #####  functionName ( formObj, reqObj, callback )
