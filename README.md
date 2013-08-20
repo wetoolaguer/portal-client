@@ -92,7 +92,7 @@ After the initialization, we can do the following:
 
 #### The requestObject
 The requestObject is an object passed to the generated http functions.
-```javascript
+```javascripy
   //this requestObject will replace the values in the route:
   // /groups/:groupId/users/:id
   var reqObject = { groupId:1, id:1 };
