@@ -18,13 +18,13 @@ var config = {
                      baseURI :"http://www.site.com",
                     authPath : "/auth/user",
                  credentials : {   email : "admin@site.com",
-                                password : "password" },
+                                password : "password" }
 };
 ```
 
 The routes object is the declaration of the namespaces to be generated
 and the http methods associated to them.
-```
+```javascript
 config.routes = {
                   users : {
 
@@ -46,7 +46,7 @@ config.routes = {
 ```
 ### HTTP Methods
 After the initialization, we can do the following:
-```
+```javascript
 
   //this will issue a post request to http://www.site.com/users
   //with the form data name: User Name
