@@ -92,7 +92,7 @@ After the initialization, we can do the following:
 
 #### The requestObject
 The requestObject is an object passed to the generated http functions.
-```javascripy
+```javascript
   //this requestObject will replace the values in the route:
   // /groups/:groupId/users/:id
   var reqObject = { groupId:1, id:1 };
@@ -112,7 +112,14 @@ The requestObject is an object passed to the generated http functions.
       //do whatever you want with the response
   });
 ```
-
+Parameters:
+*reqObj (required if parameter is desired): The requestObject of which
+ key-value pairs replace the corresponding parameters in the declared
+routes.
+*paramter (optional):An object of which key-value pairs are converted as
+ query string.
+*callback: The callback function to be executed when the request
+ receives a response.
 #### Generated Post Methods
 #####  functionName ( formObj, reqObj, callback )
 
