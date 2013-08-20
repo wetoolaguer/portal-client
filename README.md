@@ -103,6 +103,15 @@ The requestObject is an object passed to the generated http functions.
   });
 
 ```
+#### The callback function
+
+After every http method call, a callback function is executed receiving
+3 parameters:
++ err: An error object which can be thrown if present.
++ resp: An http response object with data such as resp.body,
+resp.headers, resp.statusCode.
++ body: A sugarcoat for resp.body
+
 #### Generated Get Methods
 #####  functionName ( reqObj, queryString, callback )
 ```javascript
@@ -120,11 +129,31 @@ routes.
  query string.
 + callback: The callback function to be executed when the request
  receives a response.
+
 #### Generated Post Methods
 #####  functionName ( formObj, reqObj, callback )
++ formObj (required): An object of which key-value pairs represent
+form data.
++ reqObj (optional): The requestObject of which
+ key-value pairs replace the corresponding parameters in the declared
+routes.
++ callback: The callback function to be executed when the request
+ receives a response.
 
 #### Generated Put Methods
 ##### functionName ( formObj, reqObj, callback )
++ formObj (required): An object of which key-value pairs represent
+form data.
++ reqObj (optional): The requestObject of which
+ key-value pairs replace the corresponding parameters in the declared
+routes.
++ callback: The callback function to be executed when the request
+ receives a response.
 
 #### Generated Del Methods
 ##### functionName ( reqObj, callback )
++ reqObj (optional): The requestObject of which
+ key-value pairs replace the corresponding parameters in the declared
+routes.
++ callback: The callback function to be executed when the request
+ receives a response.
