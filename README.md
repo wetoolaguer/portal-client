@@ -22,8 +22,9 @@ var config = {
 };
 ```
 
+### Routes
 The routes object is the declaration of the namespaces to be generated
-and the http methods associated to them.
+and the http methods associated with them.
 ```javascript
 config.routes = {
                   users : {
@@ -97,6 +98,7 @@ The requestObject is an object passed to the generated http functions.
   // /groups/:groupId/users/:id
   var reqObject = { groupId:1, id:1 };
 
+  //this will issue a get request to http://www.site.com/groups/1/users/1
   portalClient.users.findInGroup (reqObject, 
   function (err, resp, body) {
     //do whatever you want with the response
@@ -109,19 +111,19 @@ After every http method call, a callback function is executed receiving
 3 parameters:
 + err: An error object which can be thrown if present.
 + resp: An http response object with data such as resp.body,
-resp.headers, resp.statusCode.
+resp.headers, resp.statusCode and etc.
 + body: A sugarcoat for resp.body
 
 #### Generated Get Methods
 #####  functionName ( reqObj, queryString, callback )
 ```javascript
   //this will issue a get request to http://www.site.com/admins?age=10
-  portalClient.users.findBy({}, { age: 10 }, function (err, resp, body) {
+  portalClient.admins.findBy({}, { age: 10 }, function (err, resp, body) {
       //do whatever you want with the response
   });
 ```
 Parameters:
-+ reqObj (required if parameter is desired): The requestObject of which
++ reqObj (required if parameter is desired): An object of which
  key-value pairs replace the corresponding parameters in the declared
 routes.
 + paramter (optional):An object of which key-value pairs are converted as
@@ -133,14 +135,14 @@ routes.
 #####  functionName ( formObj, reqObj, callback )
 ```javascript
   //this will issue a post request to http://www.site.com/admins
-  //with the form data name: User Name, password: pass
+  //with the form data name: Admin Name, password: pass
   portalClient.admins.create({ name: "Admin Name", password: "pass" }, function (err, resp, body) {
       //do whatever you want with the response
   });
 ```
 + formObj (required): An object of which key-value pairs represent
 form data.
-+ reqObj (optional): The requestObject of which
++ reqObj (optional): An object of which
  key-value pairs replace the corresponding parameters in the declared
 routes.
 + callback: The callback function to be executed when the request
@@ -158,7 +160,7 @@ routes.
 ```
 + formObj (required): An object of which key-value pairs represent
 form data.
-+ reqObj (optional): The requestObject of which
++ reqObj (optional): An object of which
  key-value pairs replace the corresponding parameters in the declared
 routes.
 + callback: The callback function to be executed when the request
@@ -172,7 +174,7 @@ routes.
       //do whatever you want with the response
   });
 ```
-+ reqObj (optional): The requestObject of which
++ reqObj (optional): An object of which
  key-value pairs replace the corresponding parameters in the declared
 routes.
 + callback: The callback function to be executed when the request
