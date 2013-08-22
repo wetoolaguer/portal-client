@@ -6,7 +6,9 @@ routes.
 Predefined routes are accessed with corresponding namespaces.
 
 ## Installation
-
+```
+npm install git+https://github.com/wetoolaguer/portal-client.git
+```
 ## Usage
 
 ### Config
@@ -153,7 +155,7 @@ routes.
 ```javascript
   //this will issue a put request to http://www.site.com/admins/1
   //with the form data name:Updated AdminName
-  portalClient.admins.update({ name: Updated UserName }, { id: 1 }, 
+  portalClient.admins.update({ name: Updated AdminName }, { id: 1 }, 
   function (err, resp, body) {
       //do whatever you want with the response
   });
