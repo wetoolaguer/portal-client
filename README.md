@@ -40,10 +40,10 @@ config.routes = {
             
                   admins : {
 
-                      findBy  : { path: "/admin/:id", method: "get" },
-                       create : { path: "/admin", method: "post" },
-                      update  : { path: "/admin/:id", method: "put" },
-                    deleteBy  : { path: "/admin/:id", method: "del" }
+                      findBy  : { path: "/admins/:id", method: "get" },
+                       create : { path: "/admins", method: "post" },
+                      update  : { path: "/admins/:id", method: "put" },
+                    deleteBy  : { path: "/admins/:id", method: "del" }
 
                   }
 }
@@ -115,9 +115,8 @@ resp.headers, resp.statusCode.
 #### Generated Get Methods
 #####  functionName ( reqObj, queryString, callback )
 ```javascript
-  //this will issue a get request to http://www.site.com/users?age=10
-  portalClient.users.findBy({}, { age: 12 }, {
-  function (err, resp, body) {
+  //this will issue a get request to http://www.site.com/admins?age=10
+  portalClient.users.findBy({}, { age: 10 }, function (err, resp, body) {
       //do whatever you want with the response
   });
 ```
@@ -132,6 +131,13 @@ routes.
 
 #### Generated Post Methods
 #####  functionName ( formObj, reqObj, callback )
+```javascript
+  //this will issue a post request to http://www.site.com/admins
+  //with the form data name: User Name, password: pass
+  portalClient.admins.create({ name: "Admin Name", password: "pass" }, function (err, resp, body) {
+      //do whatever you want with the response
+  });
+```
 + formObj (required): An object of which key-value pairs represent
 form data.
 + reqObj (optional): The requestObject of which
@@ -142,6 +148,14 @@ routes.
 
 #### Generated Put Methods
 ##### functionName ( formObj, reqObj, callback )
+```javascript
+  //this will issue a put request to http://www.site.com/admins/1
+  //with the form data name:Updated AdminName
+  portalClient.admins.update({ name: Updated UserName }, { id: 1 }, 
+  function (err, resp, body) {
+      //do whatever you want with the response
+  });
+```
 + formObj (required): An object of which key-value pairs represent
 form data.
 + reqObj (optional): The requestObject of which
@@ -152,6 +166,12 @@ routes.
 
 #### Generated Del Methods
 ##### functionName ( reqObj, callback )
+```javascript
+  //this will issue a del request to http://www.site.com/admins/1
+  portalClient.admins.deleteBy({ id: 1 }, function (err, resp, body) {
+      //do whatever you want with the response
+  });
+```
 + reqObj (optional): The requestObject of which
  key-value pairs replace the corresponding parameters in the declared
 routes.
