@@ -1,7 +1,6 @@
 # PORTAL CLIENT
 
-This is a module that generates an HTTP client with predefined uri and
-routes.
+This is an HTTP client with predefined uri and routes.
 
 Predefined routes are accessed with corresponding namespaces.
 
@@ -64,7 +63,7 @@ After the initialization, we can do the following:
 ```javascript
 
   //this will issue a post request to http://www.site.com/users
-  //with the form data name: User Name
+  //with the form data, name: User Name
   portalClient.users.create({ name: "User Name" }, function (err, resp, body) {
       //do whatever you want with the response
   });
@@ -75,7 +74,7 @@ After the initialization, we can do the following:
   });
 
   //this will issue a put request to http://www.site.com/users/1
-  //with the form data name:Updated UserName
+  //with the form data, name:Updated UserName
   portalClient.users.update({ name: Updated UserName }, { id: 1 }, 
   function (err, resp, body) {
       //do whatever you want with the response
@@ -87,7 +86,7 @@ After the initialization, we can do the following:
   });
  
   //this will issue a post request to http://www.site.com/admins
-  //with the form data name: Admin Name
+  //with the form data, name: Admin Name
   portalClient.admins.create({ name: "Admin Name" }, function (err, resp, body) {
       //do whatever you want with the response
   });
