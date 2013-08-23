@@ -71,7 +71,7 @@ authenticate function.
 
   portalClient.authenticate (credentials, function (err, resp, body) {
       //portal client is authenticated after this, if config and credentials 
-      are right.
+      //are right.
   }); 
 ```
 ### HTTP Methods
