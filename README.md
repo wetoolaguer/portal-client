@@ -58,6 +58,22 @@ config.routes = {
       //Portal Client is now usable in this callback function.
   });
 ```
+By default, portal client authenticates with the given configuration
+object. If authentication is not desired, you may pass a false parameter
+in the constructor before the config object.
+ 
+### Authentication
+If authentication is disabled, you may still authenticate later with the
+authenticate function.
+```javascript
+  var credentials = {   email : "admin@site.com",
+                        password : "password" }
+
+  portalClient.authenticate (credentials, function (err, resp, body) {
+      //portal client is authenticated after this, if config and credentials 
+      are right.
+  }); 
+```
 ### HTTP Methods
 After the initialization, we can do the following:
 ```javascript
@@ -115,6 +131,10 @@ After every http method call, a callback function is executed receiving
 resp.headers, resp.statusCode and etc.
 + body: A sugarcoat for resp.body
 
+Portal client is written on top of mikeal's [request]:https://github.com/mikeal/request
+package. You can view its documentation for more information on the
+returned objects.
+
 #### Generated Get Methods
 #####  functionName ( reqObj, queryString, callback )
 ```javascript
@@ -136,7 +156,7 @@ routes.
 #####  functionName ( formObj, reqObj, callback )
 ```javascript
   //this will issue a post request to http://www.site.com/admins
-  //with the form data name: Admin Name, password: pass
+  //with the form data, name: Admin Name, password: pass
   portalClient.admins.create({ name: "Admin Name", password: "pass" }, function (err, resp, body) {
       //do whatever you want with the response
   });
@@ -149,12 +169,27 @@ routes.
 + callback: The callback function to be executed when the request
  receives a response.
 
+###### Multipart Post
+Passing a formObject with a property of which value is an object will
+automatically trigger a multipart post.
+```javascript
+      var fileLoc = './admin_profile.txt';
+      var profile = fs.createReadStream(fileLoc);
+
+      var formObj = { name : Admin Name, file: profile }  
+
+      //this will issue a post request to http://www.site.com/admins
+      //with the form data, name: Admin Name, file: admin_profile.txt
+      restClient.admins.create (formObj, function (err, resp, body) {
+          //do whatever you want with the response
+      });
+```
 #### Generated Put Methods
 ##### functionName ( formObj, reqObj, callback )
 ```javascript
   //this will issue a put request to http://www.site.com/admins/1
   //with the form data name:Updated AdminName
-  portalClient.admins.update({ name: Updated AdminName }, { id: 1 }, 
+  portalClient.admins.update({ name: "Updated AdminName" }, { id: 1 }, 
   function (err, resp, body) {
       //do whatever you want with the response
   });
@@ -166,6 +201,22 @@ form data.
 routes.
 + callback: The callback function to be executed when the request
  receives a response.
+
+###### Multipart Post
+Passing a formObject with a property of which value is an object will
+automatically trigger a multipart put.
+```javascript
+      var fileLoc = './admin_profile.txt';
+      var profile = fs.createReadStream(fileLoc);
+
+      var formObj = { file: profile }  
+
+      //this will issue a put request to http://www.site.com/admins/1
+      //with the form data, file: admin_profile.txt
+      restClient.admins.update (formObj, { id: 1 }, function (err, resp, body) {
+          //do whatever you want with the response
+      });
+```
 
 #### Generated Del Methods
 ##### functionName ( reqObj, callback )
