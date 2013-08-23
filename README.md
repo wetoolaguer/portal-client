@@ -131,7 +131,7 @@ After every http method call, a callback function is executed receiving
 resp.headers, resp.statusCode and etc.
 + body: A sugarcoat for resp.body
 
-Portal client is written on top of mikeal's [request]:https://github.com/mikeal/request
+Portal client is written on top of mikeal's [request]: https://github.com/mikeal/request
 package. You can view its documentation for more information on the
 returned objects.
 
